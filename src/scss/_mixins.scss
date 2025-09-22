@@ -1,0 +1,22 @@
+@use 'variables' as *;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+@mixin button($btn-color, $btn-hover) {
+    padding: $padding;
+    background-color: $btn-color;
+    color: white;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background-color: $btn-hover;
+    }
+}

@@ -1,0 +1,303 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+body {
+    background-color: $bg-light;
+    color: $text-dark;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    @include flex-center;
+}
+
+.night-mode {
+    position: absolute;
+    top: 24px;
+    left: 34px;
+    // transform: translate(16px, 4px);
+
+    max-width: 20px;
+    max-height: 20px;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+
+    background-color: $nmode-bg;
+    border-radius: $nmode-radius;
+    padding: $nmode-padding;
+    cursor: pointer;
+    font-size: $nmode-font-size;
+    transition: transform 0.25s ease-in-out;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #ffffff;
+    }
+}
+
+.btnnight-mode-active {
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+        background-color: #181818;
+    }
+}
+
+.header {
+    color: $text-dark;
+    font-family: $font-main;
+    font-size: $font-size-larger;
+    text-align: center;
+    padding-top: 250px;
+
+    &__title {
+        color: $text-dark;
+        margin: 0;
+        font-size: $font-size-larger;
+    }
+}
+
+.main {
+    flex-direction: column;
+    padding: 30px;
+}
+
+.add-habit {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
+    justify-content: center;
+    max-width: 500px;
+    width: 500px;
+
+    .habit-input {
+        flex: 1;
+        padding: $padding;
+        border: 1px solid #ccc;
+        border-radius: $border-radius;
+        font-size: $font-size-smaller;
+        text-align: center;
+        outline: none;
+        height: 25px;
+        transition: outline 0.5s ease, height 0.3s ease;
+    
+        &::placeholder {
+        opacity: 1;
+        color: $input-placeholder-color;
+    }
+
+       &:focus {
+        color: $input-placeholder-color;
+        outline: 1px solid $input-placeholder-focus;
+        height: 30px;
+       }
+    }
+
+    .add-btn {
+        @include button($btn-color, $btn-hover);
+        font-size: $font-size-smaller;
+        max-width: 300px;
+        width: 200px;
+    }
+}
+
+.habit-list {
+    width: 40%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 10px;
+
+    // Стили для js окон
+    .habit-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #fff;
+        border: 2px solid #e7e7e7;
+        border-radius: $border-radius;
+        font-family: $font-main;
+        font-size: $font-size-smaller;
+        transition: background-color 0.3s ease;
+
+        .complete-habit {
+            padding: 5px 10px;
+            background-color: #e7e7e7;
+            color: $text-dark;
+            border: none;
+            border-radius: $border-radius;
+            cursor: pointer;
+            font-size: $font-size-smaller;
+            transition: background-color 0.3s;
+            
+            &:hover {
+                background-color: darken(#2ecc71, 10%);
+            }
+        }
+        
+        .delete-habit {
+            padding: 5px 10px;
+            background-color: #e7e7e7;
+            color: $text-dark;
+            border: none;
+            border-radius: $border-radius;
+            cursor: pointer;
+            font-size: $font-size-smaller;
+            transition: background-color 0.3s;
+            
+            &:hover {
+                background-color: darken(#e74c3c, 10%);
+            }
+        }
+    }
+}
+
+.completed {
+  position: relative;
+  color: #4caf50; // зеленый цвет для выполненной привычки
+  transition: color 0.3s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: #4caf50;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    user-select: none;
+  }
+
+  // Когда класс добавлен, линия появляется
+  &.animate::after {
+    transform: scaleX(1);
+  }
+}
+
+.uncompleted {
+    color: #e74c3c;
+}
+
+//     .habit-item {
+//         padding: 15px;
+//         margin-top: 10px;
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         border: 1px solid #ccc;
+//         border-radius: $border-radius;
+//         font-family: $font-title;
+//         transition: background-color 0.3s ease;
+
+//         &__text {
+//             font-size: $font-size-smaller;
+//         }
+
+//         &__delete {
+//             @include button(#000000, #000000);
+//             padding: 6px 12px;
+//             font-size: 14px;
+//             cursor: pointer;
+//             transition: background 0.3s;
+
+//             &:hover {
+//                 background-color: darken(#e74c3c, 10%);
+//             }
+//         }
+//     }
+// }
+
+// Темная тема //
+body.dark-theme {
+  background-color: $bg-dark;
+
+  .header {
+    color: $text-light;
+
+    &__title {
+      color: $text-light;
+    }
+  }
+
+  .delete-habit {
+    color: $text-light;
+
+    &:hover {
+      background-color: darken(#e74c3c, 10%);
+    }
+  }
+  
+  .complete-habit {
+    padding: 5px 10px;
+    background-color: #e7e7e7;
+    color: $text-dark;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: $font-size-smaller;
+    transition: background-color 0.3s;
+    
+    &:hover {
+        background-color: darken(#2ecc71, 10%);
+    }
+}
+
+  .delete-habit {
+    padding: 5px 10px;
+    background-color: #e7e7e7;
+    color: $text-dark;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: $font-size-smaller;
+    transition: background-color 0.3s;
+        
+    &:hover {
+        background-color: darken(#e74c3c, 10%);
+    }
+}
+}
+
+  .completed {
+    position: relative;
+    color: #4caf50; // зеленый цвет для выполненной привычки
+    transition: color 0.3s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 2px;
+      background-color: #4caf50;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+      user-select: none;
+    }
+
+    // Когда класс добавлен, линия появляется
+    &.animate::after {
+      transform: scaleX(1);
+    }
+}
+
+  .uncompleted {
+      color: #e74c3c;
+}
