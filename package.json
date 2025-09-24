@@ -18,5 +18,14 @@
   },
   "devDependencies": {
     "sass": "^1.93.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LatteLorenso/habit-tracker.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/LatteLorenso/habit-tracker/issues"
+  },
+  "homepage": "https://github.com/LatteLorenso/habit-tracker#readme"
 }

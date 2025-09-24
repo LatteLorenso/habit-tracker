@@ -6,14 +6,30 @@
     <title>Habit Tracker App</title>
     <link rel="stylesheet" href="../dist/css/main.css">
 </head>
-<body>
-
-    <div id="nmode" class="night-mode">
-		🌓
-		<!-- 🌄☀️ --> 
-	</div>
+<body> 
 
     <header class="header">
+        <!-- Кнопка переключения темной темы -->
+        <section id="nmode" class="night-mode">
+		  🌓
+		  <!-- 🌄☀️ -->
+        </section>
+
+        <section>
+        <!-- Меню-гамбургер, история привычек -->
+          <button id="hamburger-menu" class="hamburger-menu">
+            ☰
+          </button>
+
+          <div id="history-menu" class="history-menu hidden">
+            <h3>История привычек</h3>
+            <button id="delete-history" class="btn-delete-history">Очистить историю</button>
+            <ul id="history-list"></ul>
+          </div>
+        </section>
+        
+
+        <!-- Главный заголовок страницы -->
         <h1 class="header__title">Habit Tracker - Мои привычки</h1>
     </header>
 
