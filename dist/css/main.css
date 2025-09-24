@@ -40,6 +40,99 @@ body {
   background-color: #181818;
 }
 
+.hamburger-menu {
+  position: absolute;
+  top: 32px;
+  right: 36px;
+  max-width: 20px;
+  max-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 30px;
+  transition: font-size 0.2s ease;
+}
+.hamburger-menu:active {
+  font-size: 28px;
+}
+body.dark-theme .hamburger-menu {
+  color: #fff;
+  background-color: #181818;
+}
+
+.history-menu {
+  position: absolute;
+  top: 30px;
+  right: 70px;
+  max-width: 350px;
+  max-height: 400px;
+  width: 330px;
+  height: 350px;
+  background-color: #e7e7e7;
+  border: none;
+  border-radius: 15px;
+  padding: 15px;
+  z-index: 100;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.history-menu h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  padding-left: 5px;
+  text-align: left;
+}
+.history-menu .btn-delete-history {
+  position: absolute;
+  top: 17px;
+  right: 15px;
+  padding: 5 10;
+  font-size: 12px;
+  justify-content: space-between;
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.history-menu .btn-delete-history:hover {
+  background-color: #b43b2d;
+}
+.history-menu ul {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+}
+.history-menu ul li {
+  padding: 5px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.history-menu ul li:completed {
+  color: #4caf50;
+}
+.history-menu ul li:uncompleted {
+  color: #e74c3c;
+}
+body.dark-theme .history-menu {
+  background-color: #333333;
+  font-size: #fff;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
 .header {
   color: #333;
   font-family: "Arial", sans-serif;

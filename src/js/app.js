@@ -12,17 +12,28 @@ function createHabitElement(habitText) {
     const habitItem = document.createElement('div');
     habitItem.classList.add('habit-item');
 
-    // Кнопка завершить привычку
+    // Кнопка выполнить привычку
     const completeHabit = document.createElement('button');
     completeHabit.textContent = '✅';
     completeHabit.classList.add('complete-habit');
 
     // Выполняем по клику
     completeHabit.addEventListener('click', () => {
-        text.classList.toggle('completed');
-        console.log('Привычка успешно выполнена!');
+        // Убираем противоположный класс
+        text.classList.remove('uncompleted');
+
+        // Добавляем/убираем класс completed
+        const isCompleted = text.classList.toggle('completed');
+        console.log(
+            isCompleted
+            ? 'Привычка успешно выполнена!'
+            : 'Привычка успешно зачеркнута!'
+        );
+
         saveHabits(); // Сохраняем изменения в localStorage
-    })
+
+        addToHistory(habitText, isCompleted);
+    });
 
     // Текст привычки
     const text = document.createElement('span');
@@ -35,10 +46,13 @@ function createHabitElement(habitText) {
 
     // Удаляем по клику
     deleteHabit.addEventListener('click', () => {
-        text.classList.toggle('uncompleted');
+        text.classList.remove('completed'); // убираем выполненный статус
+        text.classList.add('uncompleted');  // ставим невыполненный статус
+
         habitItem.remove();
         console.log('Привычка успешно зачеркнута!');
-        saveHabits(); // Сохраняем изменения в localStorage 
+        saveHabits(); // Сохраняем изменения в localStorage
+        addToHistory(habitText, false);
     });
 
     // Собираем элементы
@@ -101,3 +115,67 @@ function addHabit() {
 
 // Слушатель кнопки "Добавить"
 addHabitBtn.addEventListener('click', addHabit);
+
+/* Меню истории привычек */
+const hamburgerMenu = document.getElementById('hamburger-menu');
+const historyMenu = document.getElementById('history-menu');
+const historyList = document.getElementById('history-list');
+
+let habitHistory = JSON.parse(localStorage.getItem('habitHistory')) || [];
+
+// Открытие/закрытие меню
+hamburgerMenu.addEventListener('click', () => {
+    historyMenu.classList.toggle('hidden');
+    renderHistory();
+});
+
+// Закрыть меню при клике на любое пустое место
+document.addEventListener('click', () => {
+    const isClickInsideMenu = historyMenu.contains(event.target);
+    const isClickonHamburger = hamburgerMenu.contains(event.target);
+
+    if (!isClickInsideMenu && !isClickonHamburger) {
+        historyMenu.classList.add('hidden');
+    }
+});
+
+// Добавление привычки в историю
+function addToHistory(habitText, isCompleted) {
+    const record = {
+        text: habitText,
+        completed: isCompleted,
+        date: new Date().toLocaleString()
+    };
+
+    habitHistory.push(record);
+    console.log('Ваша привычка сохранена в историю!');
+    localStorage.setItem('habitHistory', JSON.stringify(habitHistory));
+}
+
+// Отображение истории
+function renderHistory() {
+    historyList.innerHTML = '';
+
+    if (habitHistory.length === 0) {
+        historyList.innerHTML = '<li>История пуста..</li>';
+        return;
+    }
+
+    habitHistory.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.date} - ${item.text}`;
+        li.classList.add(item.completed ? 'completed' : 'uncompleted');
+        historyList.appendChild(li);
+    });
+}
+
+// Удаление истории
+const deleteHistory = document.getElementById('delete-history');
+
+deleteHistory.addEventListener('click', () => {
+    if (confirm('Вы уверены, что хотите полностью очистить историю привычек?')) {
+        localStorage.removeItem('habitHistory');
+        historyList.innerHTML = '';
+        console.log('История привычек полностью очищена!');
+    }
+});

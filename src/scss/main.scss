@@ -47,6 +47,120 @@ body {
     }
 }
 
+.hamburger-menu {
+    position: absolute;
+    top: 32px;
+    right: 36px;
+    // transform: translate(16px, 4px);
+
+    max-width: 20px;
+    max-height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: $nmode-radius;
+    cursor: pointer;
+    font-size: $nmode-font-size;
+    transition: font-size 0.2s ease;
+
+    &:active {
+      font-size: 28px;
+    }
+
+    body.dark-theme & {
+      color: $text-light;
+      background-color: #181818;
+    }
+}
+
+.history-menu {
+  position: absolute;
+  top: 30px;
+  right: 70px;
+  max-width: 350px;
+  max-height: 400px;
+  width: 330px;
+  height: 350px;
+  
+
+  
+  background-color: $bg-darking-light;
+  border: none;
+  border-radius: $border-radius;
+  padding: 15px;
+  z-index: 100;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  h3 {
+    margin: 0 0 10px;
+    font-size: $font-size-smaller;
+    padding-left: 5px;
+    text-align: left;
+  }
+
+  .btn-delete-history {
+    position: absolute;
+    top: 17px;
+    right: 15px;
+    padding: 5 10;
+    font-size: 12px;
+    justify-content: space-between;
+    
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #b43b2d;
+    }
+  }
+
+  ul {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    overflow: hidden;
+
+    li {
+      padding: 5px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+
+      &:completed {
+        color: #4caf50;
+      }
+
+      &:uncompleted {
+        color: #e74c3c;
+      }
+    }
+  }
+
+  body.dark-theme & {
+    background-color: $bg-lighting-dark;
+    font-size: $text-light;
+  }
+}
+
+// Скрытое меню
+.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+
 .header {
     color: $text-dark;
     font-family: $font-main;
@@ -149,7 +263,7 @@ body {
         
         .delete-habit {
             padding: 5px 10px;
-            background-color: #e7e7e7;
+            background-color: $bg-darking-light;
             color: $text-dark;
             border: none;
             border-radius: $border-radius;
