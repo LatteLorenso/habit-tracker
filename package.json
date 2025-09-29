@@ -2,8 +2,10 @@
   "name": "habit-tracker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/models/server.js",
   "scripts": {
+    "dev": "nodemon server/server.js",
+    "start": "node server/server.js",
     "sass": "sass src/scss/main.scss dist/css/main.css",
     "sass:watch": "sass --watch src/scss/main.scss dist/css/main.css",
     "postcss": "postcss dist/css/main.css -o dist/css/main.min.css"
@@ -12,11 +14,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "autoprefixer": "^10.4.21",
-    "cssnano": "^7.1.1",
-    "postcss": "^8.5.6"
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "node.js": "^0.0.1-security"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.1.1",
+    "nodemon": "^3.1.10",
+    "postcss": "^8.5.6",
     "sass": "^1.93.0"
   },
   "repository": {
